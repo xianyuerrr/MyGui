@@ -1,6 +1,5 @@
 package studentsManger.loginInterface;
 
-import javax.sound.midi.Soundbank;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -28,7 +27,7 @@ public class LoginPanel extends Panel {
     // row2
     private Button loginBt;
     private Button quitBt;
-
+    private ResponseButton responseButton = new ResponseButton();
     private Frame fatherFrame;
 
     LoginPanel(Frame fatherFrame){
@@ -77,8 +76,24 @@ public class LoginPanel extends Panel {
         this.loginBt = new Button("login");
         this.quitBt = new Button("quit");
 
+        this.loginBt.addActionListener(this.responseButton);
+        this.quitBt.addActionListener(this.responseButton);
+
         this.row_2.add(loginBt);
         this.row_2.add(quitBt);
     }
 
+    class ResponseButton implements ActionListener {
+        // Button点击反应
+        public void actionPerformed(ActionEvent e){
+            Object con = e.getSource();
+            if (con == LoginPanel.this.loginBt){
+                String user = LoginPanel.this.acText.getText(), password = LoginPanel.this.pwText.getText();
+                Prompt prompt = new Prompt(LoginPanel.this.fatherFrame, Login.testUser(new String[] {user, password}));
+            }
+            else if(con == LoginPanel.this.quitBt){
+                System.exit('0');
+            }
+        }
+    }
 }
