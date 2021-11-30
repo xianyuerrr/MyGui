@@ -35,12 +35,11 @@ public class MainInterface extends Frame {
 
 
     StudentsFile stus = new StudentsFile();
-    File stuFile;
 
 
     public MainInterface(){
         super();
-//        System.out.println("用户的当前工作目录:/n" + System.getProperty("user.dir"));
+
         this.stus = new StudentsFile();
 
         MyMethods.setDeafultWindow(this);
@@ -71,6 +70,14 @@ public class MainInterface extends Frame {
         this.findButton = new Button("find");
         this.showButton = new Button("show");
 
+        ResponseButton rb = new ResponseButton();
+
+        this.addButton.addActionListener(rb);
+        this.delButton.addActionListener(rb);
+        this.changeButton.addActionListener(rb);
+        this.findButton.addActionListener(rb);
+        this.showButton.addActionListener(rb);
+
         havePanel.add(this.addButton);
         havePanel.add(this.delButton);
         havePanel.add(this.changeButton);
@@ -79,6 +86,28 @@ public class MainInterface extends Frame {
 
         featurePl.add(havePanel);
         featurePl.add(new Panel());
+    }
+
+
+    class ResponseButton implements ActionListener{
+        public void actionPerformed(ActionEvent e){
+            Object con = e.getSource();
+            if (con == MainInterface.this.addButton){
+                MainInterface.this.addFrame = new Add(MainInterface.this);
+            }
+            else if (con == MainInterface.this.delButton){
+                MainInterface.this.delFrame = new Del(MainInterface.this);
+            }
+            else if (con == MainInterface.this.changeButton){
+                MainInterface.this.changeFrame = new Change(MainInterface.this);
+            }
+            else if (con == MainInterface.this.findButton){
+                MainInterface.this.findFrame = new Find(MainInterface.this);
+            }
+            else if (con == MainInterface.this.showButton){
+                MainInterface.this.showDialog = new ShowStu(MainInterface.this);
+            }
+        }
     }
 
 
