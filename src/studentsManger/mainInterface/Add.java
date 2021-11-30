@@ -125,6 +125,7 @@ public class Add extends Feature {
                 Add.this.sexText.setText("");
             }
             else if (con == Add.this.quitBt){
+                Add.this.fatherFrame.writeStus(Add.this.fatherFrame.stuFile);
                 Add.this.dispose();
             }
         }

@@ -126,6 +126,7 @@ public class Change extends Feature{
                 Change.this.sexText.setText("");
             }
             else if (con == Change.this.quitBt){
+                Change.this.fatherFrame.writeStus(Change.this.fatherFrame.stuFile);
                 Change.this.dispose();
             }
         }

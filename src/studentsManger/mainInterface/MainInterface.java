@@ -35,12 +35,14 @@ public class MainInterface extends Frame {
 
 
     StudentsFile stus = new StudentsFile();
+    File stuFile;
 
 
     public MainInterface(){
         super();
-
-        this.stus = new StudentsFile();
+        System.out.println("用户的当前工作目录:/n" + System.getProperty("user.dir"));
+        this.stuFile = new File("students.txt");
+        this.readStus(stuFile);
 
         MyMethods.setDeafultWindow(this);
 
@@ -86,6 +88,63 @@ public class MainInterface extends Frame {
 
         featurePl.add(havePanel);
         featurePl.add(new Panel());
+    }
+
+
+     void readStus(File stuFile){
+        if (stuFile.exists()) {
+            FileInputStream fis = null;
+            try {
+                fis = new FileInputStream(stuFile);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+
+            ObjectInputStream ois = null;
+            try {
+                ois = new ObjectInputStream(fis);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            try {
+                this.stus = (StudentsFile) ois.readObject();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
+        else{
+            try {
+                stuFile.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            this.stus = new StudentsFile();
+        }
+    }
+
+    void writeStus(File stuFile) {
+        FileOutputStream fos = null;
+        try {
+            fos = new FileOutputStream(stuFile);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        ObjectOutputStream oos = null;
+        try {
+            oos = new ObjectOutputStream(fos);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            oos.writeObject(this.stus);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 

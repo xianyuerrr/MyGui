@@ -104,6 +104,7 @@ public class Find extends Feature{
                 Find.this.sIdText.setText("");
             }
             else if (con == Find.this.quitBt){
+                Find.this.fatherFrame.writeStus(Find.this.fatherFrame.stuFile);
                 Find.this.dispose();
             }
         }

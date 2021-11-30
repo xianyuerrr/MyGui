@@ -104,6 +104,7 @@ public class Del extends Feature {
                 Del.this.sIdText.setText("");
             }
             else if (con == Del.this.quitBt){
+                Del.this.fatherFrame.writeStus(Del.this.fatherFrame.stuFile);
                 Del.this.dispose();
             }
         }
