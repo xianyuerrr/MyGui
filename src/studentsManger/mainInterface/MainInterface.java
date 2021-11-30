@@ -40,7 +40,7 @@ public class MainInterface extends Frame {
 
     public MainInterface(){
         super();
-        System.out.println("用户的当前工作目录:/n" + System.getProperty("user.dir"));
+        System.out.println("用户的当前工作目录: " + System.getProperty("user.dir"));
         this.stuFile = new File("students.txt");
         this.readStus(stuFile);
 
